@@ -3,67 +3,76 @@ var styles = [
   {
     featureType: 'water',
     stylers: [
-      { color: '#19a0d8' }
-    ]
-  },{
+      { color: '#19a0d8' },
+    ],
+  },
+  {
     featureType: 'administrative',
     elementType: 'labels.text.stroke',
     stylers: [
       { color: '#ffffff' },
-      { weight: 6 }
-    ]
-  },{
+      { weight: 6 },
+    ],
+  },
+  {
     featureType: 'administrative',
     elementType: 'labels.text.fill',
     stylers: [
-      { color: '#e85113' }
-    ]
-  },{
+      { color: '#e85113' },
+    ],
+  },
+  {
     featureType: 'road.highway',
     elementType: 'geometry.stroke',
     stylers: [
       { color: '#efe9e4' },
-      { lightness: -40 }
-    ]
-  },{
+      { lightness: -40 },
+    ],
+  },
+  {
     featureType: 'transit.station',
     stylers: [
       { weight: 9 },
-      { hue: '#e85113' }
-    ]
-  },{
+      { hue: '#e85113' },
+    ],
+  },
+  {
     featureType: 'road.highway',
     elementType: 'labels.icon',
     stylers: [
-      { visibility: 'off' }
-    ]
-  },{
+      { visibility: 'off' },
+    ],
+  },
+  {
     featureType: 'water',
     elementType: 'labels.text.stroke',
     stylers: [
-      { lightness: 100 }
-    ]
-  },{
+      { lightness: 100 },
+    ],
+  },
+  {
     featureType: 'water',
     elementType: 'labels.text.fill',
     stylers: [
-      { lightness: -100 }
-    ]
-  },{
+      { lightness: -100 },
+    ],
+  },
+  {
     featureType: 'poi',
     elementType: 'geometry',
     stylers: [
       { visibility: 'on' },
-      { color: '#f0e4d3' }
-    ]
-  },{
+      { color: '#f0e4d3' },
+    ],
+  },
+  {
     featureType: 'road.highway',
     elementType: 'geometry.fill',
     stylers: [
       { color: '#efe9e4' },
-      { lightness: -25 }
-    ]
-  }
+      { lightness: -25 },
+    ],
+  },
 ];
 
 var map;
@@ -116,8 +125,8 @@ function initMap() {
     cache: true,
     data: parameters,
     dataType: 'jsonp',
-    success: function(data) {
-      data.businesses.forEach(function(r) {
+    success: function (data) {
+      data.businesses.forEach(function (r) {
         locations.push({
           title: r.name,
           location: {
@@ -132,7 +141,6 @@ function initMap() {
       });
 
       var largeInfowindow = new google.maps.InfoWindow();
-      var bounds = new google.maps.LatLngBounds();
       // The following group uses the location array to create an array of markers on initialize.
       for (var i = 0; i < locations.length; i++) {
         // Get the position from the location array.
@@ -153,13 +161,13 @@ function initMap() {
         // Push the marker to our array of markers.
         markers.push(marker);
         // Create an onclick event to open an infowindow at each marker.
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
           populateInfoWindow(this, largeInfowindow);
         });
       }
 
-      showListings()
-      displayList(markers, largeInfowindow);
+      showListings();
+      displayList(markers);
 
       document.getElementById('search-result')
         .innerHTML = data.businesses.length + ' restos';
@@ -167,9 +175,9 @@ function initMap() {
       document.getElementById('show-listings').addEventListener('click', showListings);
       document.getElementById('hide-listings').addEventListener('click', hideListings);
     },
-    error: function(err) {
+    error: function (err) {
       console.log('Err', err);
-    }
+    },
   });
 }
 // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -177,7 +185,7 @@ function initMap() {
 // on that markers position.
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
-  if (infowindow.marker != marker) {
+  if (infowindow.marker !== marker) {
     infowindow.marker = marker;
     infowindow.setContent('<div>' +
                             '<h3>' +
@@ -191,7 +199,7 @@ function populateInfoWindow(marker, infowindow) {
                           '</div>');
     infowindow.open(map, marker);
     // Make sure the marker property is cleared if the infowindow is closed.
-    infowindow.addListener('closeclick', function() {
+    infowindow.addListener('closeclick', function () {
       infowindow.setMarker(null);
     });
   }
@@ -215,11 +223,12 @@ function hideListings() {
 }
 
 // Display resto list in the sidebar
-function displayList(markers, largeInfowindow) {
-  for(var i = 0; markers.length > i; i++) {
+function displayList(markers) {
+  for (var i = 0; markers.length > i; i++) {
     var id = 'resto-' + i;
     var node = document.createElement('li');
     node.setAttribute('id', id);
+    node.setAttribute('class', 'resto-item');
     var textnode = document.createTextNode(markers[i].title);
     node.appendChild(textnode);
     document
@@ -229,8 +238,8 @@ function displayList(markers, largeInfowindow) {
     // When clicked a restaurant in list, it opens infowindow
     document
       .getElementById(id)
-      .addEventListener('click', function(marker) {
-        return function() {
+      .addEventListener('click', function (marker) {
+        return function () {
           google.maps.event.trigger(marker, 'click');
         };
       }(markers[i]));

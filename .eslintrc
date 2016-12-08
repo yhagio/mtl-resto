@@ -3,8 +3,15 @@
     "es6": false,
     "browser": true
   },
-  "extends": "airbnb",
+  "extends": ["eslint-config-airbnb-es5"],
   "rules": {
     "no-console": [2, {"allow": ["log", "warn", "error"]}],
+    "comma-dangle": ["error", "always-multiline"],
+    "func-names": ["error", "never"]
   },
+  "globals": {
+    "google": true,
+    "oauthSignature": true,
+    "$": true
+  }
 }

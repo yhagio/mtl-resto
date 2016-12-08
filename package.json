@@ -6,7 +6,7 @@
   "scripts": {
     "start": "http-server src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/. ; exit 0"
+    "lint": "eslint src/main.js ; exit 0"
   },
   "keywords": [
     "GoogleMap",
@@ -15,9 +15,11 @@
   "author": "Yuichi Hagio <yhagio87@gmail.com> (http://github.com/yhagio)",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "eslint": "latest",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-config-airbnb-es5": "^1.1.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1"
