@@ -1,0 +1,10 @@
+{
+  "env": {
+    "es6": false,
+    "browser": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "no-console": [2, {"allow": ["log", "warn", "error"]}],
+  },
+}

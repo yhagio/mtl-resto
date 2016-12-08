@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="Author" content="Yuichi Hagio">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" media="screen" href="main.css">
+    <title>MTL Restos</title>
+  </head>
+  <body>
+    <div class="options-box">
+      <h1>MTL Restos</h1>
+      <div>
+        <input id="show-listings" type="button" class="btn" value="Show Listings" />
+        <input id="hide-listings" type="button" class="btn" value="Hide Listings" />
+        <!--<form id='search-form'>
+          <input id='search' placeholder='Search' />
+          <button>Search</button>
+        </form>-->
+        <div id='search-result'></div>
+        <ul id='resto-list'></ul>
+      </div>
+    </div>
+    <div id="map"></div>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiQL3MaQoekiwc1wTJwG3ZCJR3VR_cjJI&v=3&callback=initMap">
+    </script>
+    <script src="oauth-signature.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
